@@ -53,3 +53,14 @@ class LinkedList:
             value = self.head.get_value()
             self.head = self.head.get_next()
             return value
+
+    def get_max(self):
+        if not self.head:
+            return None
+        else:
+            current_node = self.head
+            max_val = current_node.get_value()
+            while current_node:
+                if current_node.get_value() > max_val:
+                    max_val = current_node.get_value()
+            return max_val
