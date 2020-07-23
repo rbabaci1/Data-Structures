@@ -51,3 +51,7 @@ class ArrayStack:
         if self.size:
             self.size -= 1
             return self.storage.pop()
+
+
+# 3- The difference between using an array vs a linked list when implement the stack data structure is, when adding elements to the data structure, when using an array we append all new elements to the end of the array vs in a linked list items are added as heads.
+# Also, when removing items from an array, we just pop the last item of the array since is the last element in vs in a linked list, we remove the head which was the last element in.
