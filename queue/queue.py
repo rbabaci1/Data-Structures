@@ -78,8 +78,8 @@ class Queue:
 
     def dequeue(self):
         if self.size:
-            if self.outbox.isEmpty():
-                while not self.inbox.isEmpty():
+            if self.outbox.isEmpty:
+                while not self.inbox.isEmpty:
                     self.outbox.push(self.inbox.pop())
             self.size -= 1
             return self.outbox.pop()

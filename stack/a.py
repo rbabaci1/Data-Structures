@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, value=None):
+    def __init__(self, value=None, next_node=None):
         self.value = value
-        self.next_node = None
+        self.next_node = next_node
 
     def get_value(self):
         return self.value
@@ -29,15 +29,6 @@ class LinkedList:
         else:
             new_node.set_next(self.head)
             self.head = new_node
-
-    def add_to_tail(self, value):
-        new_node = Node(value)
-        if not self.tail:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.set_next(new_node)
-            self.tail = new_node
 
     def remove_head(self):
         if not self.head:

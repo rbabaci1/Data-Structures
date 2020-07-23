@@ -23,6 +23,7 @@ class Stack:
     def __len__(self):
         return self.size
 
+    @property
     def isEmpty(self):
         return self.size == 0
 
