@@ -1,4 +1,5 @@
 from singly_linked_list import LinkedList
+from stack import Stack
 """
 A queue is a data structure whose primary purpose is to store and
 return elements in First In First Out order. 
@@ -38,7 +39,7 @@ class ArrayQueue:
 # Implemented using a linked list
 
 
-class Queue:
+class QueueOne:
     def __init__(self):
         self.size = 0
         self.storage = LinkedList()
@@ -54,3 +55,32 @@ class Queue:
         if self.size:
             self.size -= 1
             return self.storage.remove_head()
+
+
+# 3- The principal benefit of a linked list over an array, is that the list elements can be easily inserted or removed without reallocation or reorganization of the entire structure because the data items need not be stored contiguously in memory or on disk.
+# When adding/removing elements from a linked list, the time complexity is O(1) vs O(n) in an array.
+
+# Implemented using two stacks
+
+
+class Queue:
+    def __init__(self):
+        self.size = 0
+        self.inbox = Stack()
+        self.outbox = Stack()
+
+    def __len__(self):
+        return self.size
+
+    def enqueue(self, value):
+        self.inbox.push(value)
+        self.size += 1
+
+    def dequeue(self):
+        if self.size:
+            if self.outbox.isEmpty():
+                while not self.inbox.isEmpty():
+                    el = self.inbox.pop()
+                    self.outbox.push(el)
+            self.size -= 1
+            return self.outbox.pop()
