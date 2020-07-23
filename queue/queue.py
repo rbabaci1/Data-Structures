@@ -39,7 +39,7 @@ class ArrayQueue:
 # Implemented using a linked list
 
 
-class QueueOne:
+class QueueQueue:
     def __init__(self):
         self.size = 0
         self.storage = LinkedList()
@@ -73,14 +73,13 @@ class Queue:
         return self.size
 
     def enqueue(self, value):
-        self.inbox.push(value)
         self.size += 1
+        self.inbox.push(value)
 
     def dequeue(self):
         if self.size:
             if self.outbox.isEmpty():
                 while not self.inbox.isEmpty():
-                    el = self.inbox.pop()
-                    self.outbox.push(el)
+                    self.outbox.push(self.inbox.pop())
             self.size -= 1
             return self.outbox.pop()
