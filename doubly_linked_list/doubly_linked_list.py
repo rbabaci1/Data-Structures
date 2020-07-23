@@ -5,10 +5,10 @@ as well as its next node in the List.
 
 
 class ListNode:
-    def __init__(self, value, prev=None, next=None):
-        self.prev = prev
+    def __init__(self, value, prev_node=None, next_node=None):
         self.value = value
-        self.next = next
+        self.prev_node = prev_node
+        self.next_node = next_node
 
 
 """
@@ -33,11 +33,16 @@ class DoublyLinkedList:
     """
 
     def add_to_head(self, value):
-        if self.length:
-            new_head = ListNode(value)
-            new_head.next = self.head
-            self.head.prev = new_head
-            self.head = new_head
+        if not self.length:
+            node = ListNode(value)
+            self.head = node
+            self.tail = node
+        else:
+            new_node = ListNode(value)
+            new_node.next_node = self.head
+            self.head.prev_node = new_node
+            self.head = new_node
+        self.length += 1
 
     """
     Removes the List's current head node, making the
@@ -46,7 +51,21 @@ class DoublyLinkedList:
     """
 
     def remove_from_head(self):
-        pass
+        if not self.head:
+            return None
+        elif not self.head.next_node:
+            head = self.head
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return head.value
+        else:
+            head_value = self.head.value
+            new_head = self.head.next_node
+            new_head.prev_node = None
+            self.head = new_head
+            self.length -= 1
+            return head_value
 
     """
     Wraps the given value in a ListNode and inserts it 
@@ -55,7 +74,16 @@ class DoublyLinkedList:
     """
 
     def add_to_tail(self, value):
-        pass
+        if not self.length:
+            node = ListNode(value)
+            self.head = node
+            self.tail = node
+        else:
+            new_node = ListNode(value)
+            new_node.prev_node = self.tail
+            self.tail.next_node = new_node
+            self.tail = new_node
+        self.length += 1
 
     """
     Removes the List's current tail node, making the 
