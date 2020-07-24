@@ -114,15 +114,21 @@ class DoublyLinkedList:
     """
 
     def move_to_front(self, node):
-        current = self.head
-        while current:
-            if current == node:
-                current.prev.next = current.next
-                current.next.prev = current.prev
-                self.add_to_head(node.value, 1)
-                self.delete_node(current)
-                break
-            current = current.next
+        if self.head:
+            if self.length == 2:
+                head_value = self.head.value
+                self.head.value = self.tail.value
+                self.tail.value = head_value
+            else:
+                current = self.head
+                while current:
+                    if current == node:
+                        current.prev.next = current.next
+                        current.next.prev = current.prev
+                        self.add_to_head(current.value, 1)
+                        self.delete_node(current)
+                        break
+                    current = current.next
 
     """
     Removes the input node from its current spot in the 
@@ -130,7 +136,21 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        pass
+        if self.tail:
+            if self.length == 2:
+                head_value = self.head.value
+                self.head.value = self.tail.value
+                self.tail.value = head_value
+            else:
+                current = self.head
+                while current:
+                    if current == node:
+                        current.prev.next = current.next
+                        current.next.prev = current.prev
+                        self.add_to_tail(current.value, 1)
+                        self.delete_node(current)
+                        break
+                    current = current.next
 
     """
     Deletes the input node from the List, preserving the 
