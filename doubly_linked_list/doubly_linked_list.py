@@ -47,11 +47,6 @@ class DoublyLinkedList:
         self.head = head_val
         self.tail = tail_val
 
-    def delete_node(self, node):
-        node.set_prev(None)
-        node.set_next(None)
-        self.length -= 1
-
     def swap_head_tail(self):
         value = self.head.get_val()
         self.head.set_val(self.tail.get_val())
@@ -195,7 +190,6 @@ class DoublyLinkedList:
                     if current == node:
                         current.get_prev().set_next(current.get_next())
                         current.get_next().set_prev(current.get_prev())
-                        self.delete_node(current)
                         break
                     current = current.get_next()
             self.length -= 1
@@ -207,13 +201,11 @@ class DoublyLinkedList:
 
     def get_max(self):
         if self.head:
-            if not self.head.get_next():
-                return self.head.get_val()
-            else:
+            max_value = self.head.get_val()
+            if self.head.get_next():
                 current = self.head
-                max_value = current.get_val()
                 while current:
                     if current.get_val() > max_value:
                         max_value = current.get_val()
                     current = current.get_next()
-                return max_value
+            return max_value
