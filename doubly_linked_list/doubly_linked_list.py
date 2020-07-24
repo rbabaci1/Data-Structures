@@ -10,6 +10,24 @@ class ListNode:
         self.prev = prev
         self.next = next
 
+    def get_next(self):
+        return self.next
+
+    def get_prev(self):
+        return self.prev
+
+    def get_val(self):
+        return self.value
+
+    def set_next(self, newNext):
+        self.next = newNext
+
+    def set_prev(self, newPrev):
+        self.prev = newPrev
+
+    def set_val(self, newVal):
+        self.value = newVal
+
 
 """
 Our doubly-linked list class. It holds references to 
@@ -31,14 +49,14 @@ class DoublyLinkedList:
         self.tail = tail_val
 
     def delete_node(self, node):
-        node.prev = None
-        node.next = None
+        node.set_prev(None)
+        node.set_next(None)
         self.length -= 1
 
     def swap_head_tail(self):
         head_value = self.head.value
-        self.head.value = self.tail.value
-        self.tail.value = head_value
+        self.head.set_val(self.tail.value)
+        self.tail.set_val(head_value)
 
     """
     Wraps the given value in a ListNode and inserts it 
@@ -51,7 +69,7 @@ class DoublyLinkedList:
         if not self.length:
             self.set_head_tail(new_node, new_node)
         else:
-            self.head.prev = new_node
+            self.head.set_prev(new_node)
             self.head = new_node
         self.length += 1
 
@@ -65,13 +83,13 @@ class DoublyLinkedList:
         head_value = None
         if not self.head:
             return None
-        elif not self.head.next:
-            head_value = self.head.value
+        elif not self.head.get_next():
+            head_value = self.head.get_val()
             self.set_head_tail(None, None)
         else:
-            head_value = self.head.value
-            new_head = self.head.next
-            new_head.prev = None
+            head_value = self.head.get_val()
+            new_head = self.head.get_next()
+            new_head.set_prev(None)
             self.head = new_head
         self.length -= 1
         return head_value
@@ -87,8 +105,8 @@ class DoublyLinkedList:
         if not self.length:
             self.set_head_tail(new_node, new_node)
         else:
-            new_node.prev = self.tail
-            self.tail.next = new_node
+            new_node.set_prev(self.tail)
+            self.tail.set_next(new_node)
             self.tail = new_node
         self.length += 1
 
@@ -102,13 +120,13 @@ class DoublyLinkedList:
         tail_value = None
         if not self.tail:
             return None
-        elif not self.head.next:
-            tail_value = self.tail.value
+        elif not self.head.get_next():
+            tail_value = self.tail.get_val()
             self.set_head_tail(None, None)
         else:
-            tail_value = self.tail.value
-            new_tail = self.tail.prev
-            new_tail.next = None
+            tail_value = self.tail.get_val()
+            new_tail = self.tail.get_prev()
+            new_tail.set_next(None)
             self.tail = new_tail
         self.length -= 1
         return tail_value
@@ -127,18 +145,18 @@ class DoublyLinkedList:
             elif self.length > 2 and node == self.tail:
                 tail = self.tail
                 self.add_to_head(tail.value)
-                self.tail = tail.prev
+                self.tail = tail.get_prev()
                 self.delete_node(tail)
             else:
                 current = self.head
                 while current:
                     if current == node:
-                        current.prev.next = current.next
-                        current.next.prev = current.prev
-                        self.add_to_head(current.value)
+                        current.get_prev().set_next(current.get_next())
+                        current.get_next().set_prev(current.get_prev())
+                        self.add_to_head(current.get_val())
                         self.delete_node(current)
                         break
-                    current = current.next
+                    current = current.get_next()
 
     """
     Removes the input node from its current spot in the 
@@ -154,18 +172,18 @@ class DoublyLinkedList:
             elif self.length > 2 and node == self.head:
                 head = self.head
                 self.add_to_tail(head.value)
-                self.head = head.next
+                self.head = head.get_next()
                 self.delete_node(head)
             else:
                 current = self.head
                 while current:
                     if current == node:
-                        current.prev.next = current.next
-                        current.next.prev = current.prev
+                        current.get_prev().set_next(current.get_next())
+                        current.get_next().set_prev(current.get_prev())
                         self.add_to_tail(current.value)
                         self.delete_node(current)
                         break
-                    current = current.next
+                    current = current.get_next()
 
     """
     Deletes the input node from the List, preserving the 
@@ -178,20 +196,20 @@ class DoublyLinkedList:
                 self.set_head_tail(None, None)
             elif self.length >= 2 and (node == self.head or node == self.tail):
                 if node == self.head:
-                    self.head = self.head.next
-                    self.head.prev = None
+                    self.head = self.head.get_next()
+                    self.head.set_prev(None)
                 else:
-                    self.tail = self.tail.prev
-                    self.tail.next = None
+                    self.tail = self.tail.get_prev()
+                    self.tail.set_next(None)
             else:
                 current = self.head
                 while current:
                     if current == node:
-                        current.prev.next = current.next
-                        current.next.prev = current.prev
+                        current.get_prev().set_next(current.get_next())
+                        current.get_next().set_prev(current.get_prev())
                         self.delete_node(current)
                         break
-                    current = current.next
+                    current = current.get_next()
             self.length -= 1
 
     """
@@ -201,13 +219,13 @@ class DoublyLinkedList:
 
     def get_max(self):
         if self.head:
-            if not self.head.next:
-                return self.head.value
+            if not self.head.get_next():
+                return self.head.get_val()
             else:
                 current = self.head
-                max_value = current.value
+                max_value = current.get_val()
                 while current:
-                    if current.value > max_value:
-                        max_value = current.value
-                    current = current.next
+                    if current.get_val() > max_value:
+                        max_value = current.get_val()
+                    current = current.get_next()
                 return max_value
