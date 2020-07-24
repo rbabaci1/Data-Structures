@@ -35,6 +35,11 @@ class DoublyLinkedList:
         node.prev = None
         node.next = None
 
+    def swap_head_tail(self):
+        head_value = self.head.value
+        self.head.value = self.tail.value
+        self.tail.value = head_value
+
     """
     Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
@@ -116,9 +121,7 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         if self.head:
             if self.length == 2:
-                head_value = self.head.value
-                self.head.value = self.tail.value
-                self.tail.value = head_value
+                self.swap_head_tail()
             else:
                 current = self.head
                 while current:
@@ -138,9 +141,7 @@ class DoublyLinkedList:
     def move_to_end(self, node):
         if self.tail:
             if self.length == 2:
-                head_value = self.head.value
-                self.head.value = self.tail.value
-                self.tail.value = head_value
+                self.swap_head_tail()
             else:
                 current = self.head
                 while current:
