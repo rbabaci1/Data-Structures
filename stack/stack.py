@@ -27,6 +27,10 @@ class Stack:
     def __len__(self):
         return self.size
 
+    @property
+    def isEmpty(self):
+        return self.size == 0
+
     def push(self, value):
         self.storage.add_to_head(value)
         self.size += 1
@@ -42,19 +46,16 @@ class Stack:
 
 class ArrayStack:
     def __init__(self):
-        self.size = 0
         self.storage = []
 
     def __len__(self):
-        return self.size
+        return len(self.storage)
 
     def push(self, value):
         self.storage.append(value)
-        self.size += 1
 
     def pop(self):
         if self.size:
-            self.size -= 1
             return self.storage.pop()
 
 
