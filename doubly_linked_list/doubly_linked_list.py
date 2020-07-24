@@ -176,23 +176,23 @@ class DoublyLinkedList:
         if self.head:
             if self.length == 1 and node == self.head:
                 self.set_head_tail(None, None)
-            elif self.length == 2:
-                self.swap_head_tail()
-            elif self.length > 2 and node == self.head:
-                head = self.head
-                self.add_to_tail(head.value)
-                self.head = head.next
-                self.delete_node(head)
+            elif self.length >= 2 and (node == self.head or node == self.tail):
+                if node == self.head:
+                    self.head = self.head.next
+                    self.head.prev = None
+                else:
+                    self.tail = self.tail.prev
+                    self.tail.next = None
             else:
                 current = self.head
                 while current:
                     if current == node:
                         current.prev.next = current.next
                         current.next.prev = current.prev
-                        self.add_to_tail(current.value)
                         self.delete_node(current)
                         break
                     current = current.next
+            self.length -= 1
 
     """
     Finds and returns the maximum value of all the nodes 
