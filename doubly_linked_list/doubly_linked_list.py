@@ -30,6 +30,11 @@ class DoublyLinkedList:
         self.head = head_val
         self.tail = tail_val
 
+    @staticmethod
+    def delete_node(node):
+        node.prev = None
+        node.next = None
+
     """
     Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
@@ -109,7 +114,16 @@ class DoublyLinkedList:
     """
 
     def move_to_front(self, node):
-        pass
+        current = self.head
+        while current:
+            if current == node:
+                current.prev.next = current.next
+                current.next.prev = current.prev
+                self.add_to_head(node.value)
+                self.length -= 1
+                self.delete_node(current)
+                break
+            current = current.next
 
     """
     Removes the input node from its current spot in the 
