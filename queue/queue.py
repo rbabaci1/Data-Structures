@@ -77,8 +77,8 @@ class Queue:
         return self.size
 
     def enqueue(self, value):
-        self.size += 1
         self.inbox.push(value)
+        self.size += 1
 
     def dequeue(self):
         if self.size:
