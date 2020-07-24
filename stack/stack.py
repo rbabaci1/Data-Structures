@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("../singly_linked_list")
 from singly_linked_list import LinkedList
 
 """
@@ -32,6 +35,7 @@ class Stack:
         if self.size:
             self.size -= 1
             return self.storage.remove_head()
+
 
 # Implemented using a list as the storage
 
