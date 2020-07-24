@@ -101,12 +101,12 @@ class DoublyLinkedList:
     """
 
     def add_to_tail(self, value):
-        new_node = ListNode(value, None, self.tail)
+        new_node = ListNode(value)
         if not self.length:
             self.set_head_tail(new_node, new_node)
         else:
-            new_node.set_prev(self.tail)
             self.tail.set_next(new_node)
+            new_node.set_prev(self.tail)
             self.tail = new_node
         self.length += 1
 
