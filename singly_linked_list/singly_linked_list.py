@@ -18,14 +18,16 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.head = None
-        self.tail = None
+        self.set_head_tail(None, None)
+
+    def set_head_tail(self, head_val, tail_val):
+        self.head = head_val
+        self.tail = tail_val
 
     def add_to_tail(self, value):
         new_node = Node(value)
         if not self.tail:
-            self.head = new_node
-            self.tail = new_node
+            self.set_head_tail(new_node, new_node)
         else:
             self.tail.set_next(new_node)
             self.tail = new_node
@@ -33,8 +35,7 @@ class LinkedList:
     def add_to_head(self, value):
         new_node = Node(value)
         if not self.head:
-            self.head = new_node
-            self.tail = new_node
+            self.set_head_tail(new_node, new_node)
         else:
             new_node.set_next(self.head)
             self.head = new_node
@@ -54,10 +55,9 @@ class LinkedList:
         if not self.head:
             return None
         if not self.head.get_next():
-            head = self.head
-            self.head = None
-            self.tail = None
-            return head.get_value()
+            head_value = self.head.get_value()
+            self.set_head_tail(None, None)
+            return head_value
         else:
             value = self.head.get_value()
             self.head = self.head.get_next()
