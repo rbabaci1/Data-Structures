@@ -14,8 +14,8 @@ This part of the project comprises two days:
 class BSTNode:
     def __init__(self, value):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = self.right = None
+        # self.right = None
 
     # Insert the given value into the tree
     def insert(self, value):
@@ -48,7 +48,18 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        if not self.right and not self.left:
+            return self.value
+        if self.right:
+            if self.right.right:
+                return self.right.get_max()
+            else:
+                return self.right.value
+        else:
+            if not self.left.right:
+                return self.left.value
+            else:
+                return self.left.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
