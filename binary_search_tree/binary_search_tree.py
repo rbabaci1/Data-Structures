@@ -1,3 +1,8 @@
+# import sys
+
+# sys.path.append("../queue")
+# from queue import Queue
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -51,7 +56,6 @@ class BSTNode:
         while self.right:
             self = self.right
         return self.value
-
         # solved recursively
         # if self.right:
         #     return self.right.get_max()
@@ -59,7 +63,16 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        queue = []
+        queue.append(self)
+        while len(queue):
+            current = queue[0]
+            fn(current.value)
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            queue.pop(0)
 
     # Part 2 -----------------------
 
