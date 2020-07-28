@@ -112,15 +112,15 @@ class BinarySearchTree:
             4- push the left node if it exists
             - repeat...
         """
-        # stack = []
-        # stack.append(self)
-        # while len(stack):
-        #     current = stack.pop()
-        #     print(current.value)
-        #     if current.right:
-        #         stack.append(current.right)
-        #     if current.left:
-        #         stack.append(current.left)
+        stack = []
+        stack.append(self)
+        while len(stack):
+            current = stack.pop()
+            print(current.value)
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
 
         # iterative InOrder traversal
         # stack = []
@@ -136,17 +136,17 @@ class BinarySearchTree:
         #         self = current.right
 
         # iterative PostOrder traversal
-        stack = []
-        values = []
-        stack.append(self)
-        while len(stack):
-            current = stack.pop()
-            values.insert(0, current.value)
-            if current.left:
-                stack.append(current.left)
-            if current.right:
-                stack.append(current.right)
-        [print(v) for v in values]
+        # stack = []
+        # values = []
+        # stack.append(self)
+        # while len(stack):
+        #     current = stack.pop()
+        #     values.insert(0, current.value)
+        #     if current.left:
+        #         stack.append(current.left)
+        #     if current.right:
+        #         stack.append(current.right)
+        # [print(v) for v in values]
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -171,28 +171,18 @@ class BinarySearchTree:
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(15)
+bst = BinarySearchTree(1)
 
-bst.insert(13)
-bst.insert(17)
-bst.insert(9)
-bst.insert(14)
-bst.insert(10)
-bst.insert(16)
-bst.insert(19)
-bst.insert(18)
-# bst = BinarySearchTree(1)
-
-# bst.insert(8)
-# bst.insert(5)
-# bst.insert(7)
-# bst.insert(6)
-# bst.insert(3)
-# bst.insert(4)
-# bst.insert(2)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
 
 
-# bst.bft_print()
+bst.bft_print()
 bst.dft_print()
 
 print("elegant methods")
