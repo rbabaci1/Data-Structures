@@ -79,7 +79,7 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        """Level order traversal
+        """[Level order traversal]
         1- create an empty queue
         2- enqueue the root node
         3- loop until the queue is empty
@@ -100,8 +100,9 @@ class BinarySearchTree:
                 queue.append(current.right)
 
     # Print the value of every node, starting with the given node,
+    # in an iterative depth first traversal
     def dft_print(self):
-        """iterative PreOrder traversal
+        """[iterative PreOrder traversal]
         1- create an empty stack
         2- push the root node to the stack
         3- loop until the stack is empty
@@ -111,15 +112,41 @@ class BinarySearchTree:
             4- push the left node if it exists
             - repeat...
         """
+        # stack = []
+        # stack.append(self)
+        # while len(stack):
+        #     current = stack.pop()
+        #     print(current.value)
+        #     if current.right:
+        #         stack.append(current.right)
+        #     if current.left:
+        #         stack.append(current.left)
+
+        # iterative InOrder traversal
+        # stack = []
+        # while True:
+        #     if self:
+        #         stack.append(self)
+        #         self = self.left
+        #     else:
+        #         if not len(stack):
+        #             break
+        #         current = stack.pop()
+        #         print(current.value)
+        #         self = current.right
+
+        # iterative PostOrder traversal
         stack = []
+        values = []
         stack.append(self)
         while len(stack):
-            root = stack.pop()
-            print(root.value)
-            if root.right:
-                stack.append(root.right)
-            if root.left:
-                stack.append(root.left)
+            current = stack.pop()
+            values.insert(0, current.value)
+            if current.left:
+                stack.append(current.left)
+            if current.right:
+                stack.append(current.right)
+        [print(v) for v in values]
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -144,6 +171,16 @@ class BinarySearchTree:
 """
 This code is necessary for testing the `print` methods
 """
+bst = BinarySearchTree(15)
+
+bst.insert(13)
+bst.insert(17)
+bst.insert(9)
+bst.insert(14)
+bst.insert(10)
+bst.insert(16)
+bst.insert(19)
+bst.insert(18)
 # bst = BinarySearchTree(1)
 
 # bst.insert(8)
@@ -156,12 +193,12 @@ This code is necessary for testing the `print` methods
 
 
 # bst.bft_print()
-# bst.dft_print()
+bst.dft_print()
 
-# print("elegant methods")
-# print("pre order")
-# bst.pre_order_dft()
-# print("in order")
-# bst.in_order_dft()
-# print("post order")
-# bst.post_order_dft()
+print("elegant methods")
+print("pre order")
+bst.pre_order_dft()
+print("in order")
+bst.in_order_dft()
+print("post order")
+bst.post_order_dft()
