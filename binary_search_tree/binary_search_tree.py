@@ -79,27 +79,38 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        # start with an empty queue
+        """Level order traversal
+        1- create an empty queue
+        2- enqueue the root node
+        3- loop until the queue is empty
+            1- dequeue the first node in the queue
+            2- manipulate the picked node
+            3- enqueue the left node if it exists
+            4- enqueue the right node if it exists
+            - repeat...
+        """
         queue = []
-        # enqueue the root node
         queue.append(self)
-        # while queue is not empty
         while len(queue):
-            # pick to get the first node in the queue
-            current = queue[0]
+            current = queue.pop(0)
             print(current.value)
             if current.left:
-                # enqueue the left node if it exists
                 queue.append(current.left)
             if current.right:
-                # enqueue the right node if it exists
                 queue.append(current.right)
-            # dequeue the the first node in the queue
-            queue.pop(0)
 
     # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal
     def dft_print(self):
+        """iterative PreOrder traversal
+        1- create an empty stack
+        2- push the root node to the stack
+        3- loop until the stack is empty
+            1- pop the top element in the stack
+            2- manipulate the popped node
+            3- push the right node if it exists (push right first to have left on top)
+            4- push the left node if it exists
+            - repeat...
+        """
         stack = []
         stack.append(self)
         while len(stack):
@@ -133,24 +144,24 @@ class BinarySearchTree:
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
+# bst = BinarySearchTree(1)
 
-bst.insert(8)
-bst.insert(5)
-bst.insert(7)
-bst.insert(6)
-bst.insert(3)
-bst.insert(4)
-bst.insert(2)
+# bst.insert(8)
+# bst.insert(5)
+# bst.insert(7)
+# bst.insert(6)
+# bst.insert(3)
+# bst.insert(4)
+# bst.insert(2)
 
 
-bst.bft_print()
-bst.dft_print()
+# bst.bft_print()
+# bst.dft_print()
 
-print("elegant methods")
-print("pre order")
-bst.pre_order_dft()
-print("in order")
-bst.in_order_dft()
-print("post order")
-bst.post_order_dft()
+# print("elegant methods")
+# print("pre order")
+# bst.pre_order_dft()
+# print("in order")
+# bst.in_order_dft()
+# print("post order")
+# bst.post_order_dft()
