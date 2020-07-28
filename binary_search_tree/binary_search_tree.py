@@ -29,9 +29,9 @@ class BinarySearchTree:
             else:
                 self.right.insert(value)
 
-    # Return True if the tree contains the value
-    # False if it does not
-    def contains(self, target):
+    def contains(self, targer):
+        # Return True if the tree contains the value
+        # False if it does not
         if target == self.value:
             return True
         elif target < self.value:
@@ -57,7 +57,7 @@ class BinarySearchTree:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        # implemented using a recursive Preorder depth first traversal
+        # implemented using a recursive depth first PreOrder traversal
         fn(self.value)
         if self.left:
             self.left.for_each(fn)
@@ -69,12 +69,12 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     # implemented using InOrder depth first traversal
-    def in_order_dft(self):
+    def in_order_print(self):
         if self.left:
-            self.left.in_order_dft()
+            self.left.in_order_print()
         print(self.value)
         if self.right:
-            self.right.in_order_dft()
+            self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -167,28 +167,50 @@ class BinarySearchTree:
             self.right.post_order_dft()
         print(self.value)
 
+    def get_height(self):
+        if self.left and self.right:
+            return max(self.left.height(), self.right.height()) + 1
+        if self.left:
+            return self.left.height() + 1
+        if self.right:
+            return self.right.height() + 1
+        else:
+            return 0
+
 
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
+bst = BinarySearchTree(15)
 
-bst.insert(8)
-bst.insert(5)
-bst.insert(7)
-bst.insert(6)
-bst.insert(3)
-bst.insert(4)
-bst.insert(2)
+bst.insert(13)
+bst.insert(17)
+bst.insert(9)
+bst.insert(14)
+bst.insert(16)
+bst.insert(19)
+bst.insert(10)
+bst.insert(18)
+
+print(bst.height())
+# bst = BinarySearchTree(1)
+
+# bst.insert(8)
+# bst.insert(5)
+# bst.insert(7)
+# bst.insert(6)
+# bst.insert(3)
+# bst.insert(4)
+# bst.insert(2)
 
 
-bst.bft_print()
-bst.dft_print()
+# bst.bft_print()
+# bst.dft_print()
 
-print("elegant methods")
-print("pre order")
-bst.pre_order_dft()
-print("in order")
-bst.in_order_dft()
-print("post order")
-bst.post_order_dft()
+# print("elegant methods")
+# print("pre order")
+# bst.pre_order_dft()
+# print("in order")
+# bst.in_order_print()
+# print("post order")
+# bst.post_order_dft()
