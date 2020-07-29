@@ -5,13 +5,14 @@ class Node:
         self.prev = prev
         self.next = next
 
+
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
         self.length = 0
-    
-    def add_as_head(self,key, value):
+
+    def add_as_head(self, key, value):
         new_node = Node(key, value, None, self.head)
         if self.length:
             self.head.prev = new_node
@@ -19,7 +20,7 @@ class DoublyLinkedList:
         else:
             self.head = self.tail = new_node
         self.length += 1
-        
+
     def remove_tail(self):
         if self.head and self.head.next:
             self.tail = self.tail.prev
@@ -41,7 +42,8 @@ class LRUCache:
     def __init__(self, limit=10):
         self.limit = limit
         self.length = 0
-        self.
+        self.list = DoublyLinkedList()
+        self.storage = {}
 
     """
     Retrieves the value associated with the given key. Also
