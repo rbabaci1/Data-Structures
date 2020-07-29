@@ -1,7 +1,32 @@
-import sys
+class Node:
+    def __init__(self, key, value, prev, next):
+        self.key = key
+        self.value = value
+        self.prev = prev
+        self.next = next
 
-sys.path.append("../doubly_linked_list")
-from doubly_linked_list import DoublyLinkedList
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.length = 0
+    
+    def add_as_head(self,key, value):
+        new_node = Node(key, value, None, self.head)
+        if self.length:
+            self.head.prev = new_node
+            self.head = new_node
+        else:
+            self.head = self.tail = new_node
+        self.length += 1
+        
+    def remove_tail(self):
+        if self.head and self.head.next:
+            self.tail = self.tail.prev
+            self.tail.next = None
+        elif self.head and not self.head.next:
+            self.head = self.tail = None
+        self.length -= 1
 
 
 class LRUCache:
@@ -16,6 +41,7 @@ class LRUCache:
     def __init__(self, limit=10):
         self.limit = limit
         self.length = 0
+        self.
 
     """
     Retrieves the value associated with the given key. Also
