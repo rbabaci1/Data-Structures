@@ -79,12 +79,12 @@ class LRUCache:
     """
 
     def get(self, key):
-        if key in self.storage:
-            value = self.storage[key]
-            del self.storage[key]
+        value = self.storage.get(key)
+        if value:
             self.list.move_to_front(key)
+            del self.storage[key]
             self.storage[key] = value
-            return self.storage[key]
+            return value
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -98,9 +98,11 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        if key in self.storage:
-            self.storage[key] = value
+        exists = self.storage.get(key)
+        if exists:
             self.list.move_to_front(key)
+            del self.storage[key]
+            self.storage[key] = value
         else:
             if self.length == self.limit:
                 self.list.remove_tail()
