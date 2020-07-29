@@ -14,8 +14,7 @@ This part of the project comprises two days:
 class BinarySearchTree:
     def __init__(self, value):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = self.right = None
 
     # Insert the given value into the tree
     def insert(self, value):
