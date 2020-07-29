@@ -14,7 +14,8 @@ This part of the project comprises two days:
 class BinarySearchTree:
     def __init__(self, value):
         self.value = value
-        self.left = self.right = None
+        self.left = None
+        self.right = None
 
     # Insert the given value into the tree
     def insert(self, value):
@@ -29,7 +30,7 @@ class BinarySearchTree:
             else:
                 self.right.insert(value)
 
-    def contains(self, targer):
+    def contains(self, target):
         # Return True if the tree contains the value
         # False if it does not
         if target == self.value:
@@ -66,7 +67,7 @@ class BinarySearchTree:
 
     # Part 2 -----------------------
 
-    # Print all the values in order from low to high
+    # Print all the result in order from low to high
     # Hint:  Use a recursive, depth first traversal
     # implemented using InOrder depth first traversal
     def in_order_print(self):
@@ -121,7 +122,6 @@ class BinarySearchTree:
                 stack.append(current.right)
             if current.left:
                 stack.append(current.left)
-
         # iterative InOrder traversal
         # stack = []
         # while True:
@@ -137,16 +137,16 @@ class BinarySearchTree:
 
         # iterative PostOrder traversal
         # stack = []
-        # values = []
+        # result = []
         # stack.append(self)
         # while len(stack):
         #     current = stack.pop()
-        #     values.insert(0, current.value)
+        #     result.insert(0, current.value)
         #     if current.left:
         #         stack.append(current.left)
         #     if current.right:
         #         stack.append(current.right)
-        # [print(v) for v in values]
+        # [print(v) for v in result]
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -169,11 +169,11 @@ class BinarySearchTree:
 
     def get_height(self):
         if self.left and self.right:
-            return max(self.left.height(), self.right.height()) + 1
+            return max(self.left.get_height(), self.right.get_height()) + 1
         if self.left:
-            return self.left.height() + 1
+            return self.left.get_height() + 1
         if self.right:
-            return self.right.height() + 1
+            return self.right.get_height() + 1
         else:
             return 0
 
@@ -181,18 +181,6 @@ class BinarySearchTree:
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(15)
-
-bst.insert(13)
-bst.insert(17)
-bst.insert(9)
-bst.insert(14)
-bst.insert(16)
-bst.insert(19)
-bst.insert(10)
-bst.insert(18)
-
-print(bst.height())
 # bst = BinarySearchTree(1)
 
 # bst.insert(8)
