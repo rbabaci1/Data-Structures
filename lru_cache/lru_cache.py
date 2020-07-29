@@ -11,10 +11,10 @@ class LRUCache:
     """
 
     def __init__(self, limit=10):
-        self.limit = limit
-        self.length = 0
         self.list = DoublyLinkedList()
         self.storage = {}
+        self.limit = limit
+        self.length = 0
 
     """
     Retrieves the value associated with the given key. Also
@@ -44,8 +44,8 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        exists = self.storage.get(key)
-        if exists:
+        keyExists = self.storage.get(key)
+        if keyExists:
             self.list.move_to_front(key)
             del self.storage[key]
             self.storage[key] = value
