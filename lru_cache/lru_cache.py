@@ -46,7 +46,7 @@ class LRUCache:
     def set(self, key, value):
         keyExists = self.storage.get(key)
         if keyExists:
-            self.list.move_to_front(key)
+            self.list.move_to_front(key, value)
             del self.storage[key]
             self.storage[key] = value
         else:

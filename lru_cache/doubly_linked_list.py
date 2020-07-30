@@ -33,13 +33,19 @@ class DoublyLinkedList:
             self.head = self.tail = None
         self.length -= 1
 
-    def move_to_front(self, key):
+    def move_to_front(self, key, value=None):
         if self.head:
             if key == self.head.key:
+                if value:
+                    self.head.value = value
                 return
             if self.length == 2 and key == self.tail.key:
+                if value:
+                    self.tail.value = value
                 self.swap_head_tail()
             elif self.length > 2 and key == self.tail.key:
+                if value:
+                    self.tail.value = value
                 self.add_as_head(self.tail.key, self.tail.value, 1)
                 self.tail = self.tail.prev
                 self.tail.next = None
@@ -47,6 +53,8 @@ class DoublyLinkedList:
                 current = self.head
                 while current:
                     if current.key == key:
+                        if value:
+                            current.value = value
                         self.add_as_head(current.key, current.value, 1)
                         current.prev.next = current.next
                         current.next.prev = current.prev
