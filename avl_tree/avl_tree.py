@@ -50,7 +50,20 @@ class AVLTree:
     """
 
     def update_height(self):
-        pass
+        if self.node.left and self.node.right:
+            self.height = (
+                max(self.node.left.update_height(), self.node.right.update_height()) + 1
+            )
+            return self.height
+        if self.node.left:
+            self.height = self.node.left.update_height() + 1
+            return self.height
+        if self.node.right:
+            self.height = self.node.right.update_height() + 1
+            return self.height
+        else:
+            self.height = 0
+            return self.height
 
     """
     Updates the balance factor on the AVLTree class
@@ -80,6 +93,9 @@ class AVLTree:
         new_root = self.node.left
         self.node.left = new_root.right
         new_root.right = self.node
+        self.height = max(self.node.left.height, self.node.right.height) + 1
+        new_root.height = max(new_root.node.left.height, new_root.node.right.height) + 1
+        return new_root
 
     """
     Sets in motion the rebalancing logic to ensure the
