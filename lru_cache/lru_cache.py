@@ -12,7 +12,7 @@ class LRUCache:
 
     def __init__(self, limit=10):
         self.list = DoublyLinkedList()
-        self.storage = {}
+        self.storage = {"list": DoublyLinkedList}
         self.limit = limit
         self.length = 0
 
