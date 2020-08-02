@@ -94,12 +94,13 @@ class AVLTree:
     """
 
     def right_rotate(self):
-        new_root = self.node.left
-        self.node.left = new_root.right
-        new_root.right = self.node
-        self.height = max(self.node.left.height, self.node.right.height) + 1
-        new_root.height = max(new_root.node.left.height, new_root.node.right.height) + 1
-        return new_root
+        root = self.node
+        new_root = root.left.node
+        new_root_right = new_root.right.node
+
+        self.node = new_root
+        root.left.node = new_root_right
+        new_root.right.node = root
 
     """
     Sets in motion the rebalancing logic to ensure the
