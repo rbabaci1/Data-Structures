@@ -31,7 +31,7 @@ class AVLTree:
         self.update_height()
         self.update_balance()
 
-        if self.node != None:
+        if self.node:
             print(
                 "-" * level * 2,
                 pref,
@@ -39,9 +39,9 @@ class AVLTree:
                 f"[{self.height}:{self.balance}]",
                 "L" if self.height == 0 else " ",
             )
-            if self.node.left.node != None:
+            if self.node.left.node:
                 self.node.left.display(level + 1, "<")
-            if self.node.right.node != None:
+            if self.node.right.node:
                 self.node.right.display(level + 1, ">")
 
     """
@@ -132,18 +132,11 @@ class AVLTree:
             if self.balance > 0:
                 if self.node.left.balance < 0:
                     self.node.left.left_rotate()
-                    self.update_height()
-                    self.update_balance()
                 self.right_rotate()
             else:
                 if self.node.right.balance > 0:
                     self.node.right.right_rotate()
-                    self.update_height()
-                    self.update_balance()
                 self.left_rotate()
-
-            self.update_height()
-            self.update_balance()
 
     """
     Uses the same insertion logic as a binary search tree
