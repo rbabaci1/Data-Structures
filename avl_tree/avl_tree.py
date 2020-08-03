@@ -28,7 +28,7 @@ class AVLTree:
     """
 
     def display(self, level=0, pref=""):
-        self.update_height()  # Update height before balancing
+        self.update_height()
         self.update_balance()
 
         if self.node != None:
@@ -39,9 +39,9 @@ class AVLTree:
                 f"[{self.height}:{self.balance}]",
                 "L" if self.height == 0 else " ",
             )
-            if self.node.left != None:
+            if self.node.left.node != None:
                 self.node.left.display(level + 1, "<")
-            if self.node.right != None:
+            if self.node.right.node != None:
                 self.node.right.display(level + 1, ">")
 
     """
