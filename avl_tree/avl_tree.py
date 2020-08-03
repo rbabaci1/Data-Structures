@@ -140,8 +140,8 @@ class AVLTree:
                     self.node.right.right_rotate()
                     self.update_height()
                     self.update_balance()
-
                 self.left_rotate()
+
             self.update_height()
             self.update_balance()
 
@@ -152,11 +152,11 @@ class AVLTree:
     """
 
     def insert(self, key):
-        if not self.node:
-            self.node = Node(key)
-        else:
+        if self.node:
             if key < self.node.key:
                 self.node.left.insert(key)
             else:
                 self.node.right.insert(key)
+        else:
+            self.node = Node(key)
         self.rebalance()
