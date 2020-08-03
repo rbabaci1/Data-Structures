@@ -50,16 +50,15 @@ class AVLTree:
     """
 
     def update_height(self):
-        if self.node.left.node and self.node.right.node:
-            self.height = (
-                max(self.node.left.update_height(), self.node.right.update_height()) + 1
-            )
+        root = self.node
+        if root.left.node and root.right.node:
+            self.height = max(root.left.update_height(), root.right.update_height()) + 1
             return self.height
-        if self.node.left.node:
-            self.height = self.node.left.update_height() + 1
+        if root.left.node:
+            self.height = root.left.update_height() + 1
             return self.height
-        if self.node.right.node:
-            self.height = self.node.right.update_height() + 1
+        if root.right.node:
+            self.height = root.right.update_height() + 1
             return self.height
         else:
             self.height = 0
@@ -120,12 +119,14 @@ class AVLTree:
     """
 
     def rebalance(self):
+        left_node = self.node.left.node
+        right_node = self.node.right.node
         self.update_height()
         self.update_balance()
 
-        if self.node.left.node:
+        if left_node:
             self.node.left.rebalance()
-        if self.node.right.node:
+        if right_node:
             self.node.right.rebalance()
 
         if abs(self.balance) > 1:
